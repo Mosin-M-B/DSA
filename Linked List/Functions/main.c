@@ -13,7 +13,7 @@ void display(struct node *temp){
     }  
     printf("NULL\n");
 }
-int create (struct node *head){
+void create (struct node **head){
     struct node *newnode = NULL , *temp = NULL;
     int ch =1;
     while (ch==1)
@@ -21,9 +21,9 @@ int create (struct node *head){
         newnode = (struct node*)malloc (sizeof(struct node));
         printf("Enter The data :");
         scanf("%d",&newnode->data);
-        if (head==NULL)
+        if (*head==NULL)
         {
-            head=temp=newnode;
+            *head=temp=newnode;
             temp->next=NULL;
         }
         else{
@@ -34,10 +34,9 @@ int create (struct node *head){
         printf("Do You Want To Continue : ");
         scanf("%d",&ch);
     }
-    return temp=head;
 }
 void main () {
-    struct node *head=NULL , *temp;
-    temp = create(head);
-    display(temp);
+    struct node *head=NULL;
+    create(&head);
+    display(head);
 }
