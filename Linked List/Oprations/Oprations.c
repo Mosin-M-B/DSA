@@ -68,13 +68,42 @@ void insert(struct node **head) {
     newnode->next = temp->next;
     temp->next = newnode;
 }
+void delete(struct node **head){
+    struct node *temp = NULL, *temp1 = NULL;
+    int position;
+    printf("Enter the position: ");
+    scanf("%d",&position);
+    temp = *head;
+    if (temp==NULL)
+    {
+        printf("List is empty\n");
+    }
+    if (position == 1)
+    {
+        *head = temp->next;
+        free(temp);
+        return;
+    }
 
+    for (int i = 1; i < position - 1 && temp != NULL; i++){
+        temp = temp->next;
+    }
+    if (temp == NULL || temp->next == NULL)
+    {
+        printf("There is no node present at that position\n");
+        return;
+    }
+    temp1 = temp->next;
+    temp->next = temp1->next;
+    free(temp1);
+    
+}
 int main() {
     struct node *head = NULL;
     int ch = 1;
 
     while (ch) {
-        printf("Enter 1 for create, 2 for insert, 3 for display, 0 to exit: ");
+        printf("Enter 1 for create, 2 for insert, 3 for display,4 for delete , 0 to exit: ");
         printf("Enter your choice: ");
         scanf("%d", &ch);
         switch (ch) {
@@ -86,6 +115,9 @@ int main() {
             break;
         case 3:
             display(head);
+            break;
+        case 4:
+            delete(&head);
             break;
         case 0:
             break;
